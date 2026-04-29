@@ -47,7 +47,7 @@ password (hashed)
 APIs:
 POST /register
 POST /login
-8. Add JWT middleware
+8. Add JWT middleware ⌛
 Frontend
 Pages:
 Login
