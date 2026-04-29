@@ -26,7 +26,7 @@ Keep your MVP small.
 /config
 3. install: ✅
 npm install express mongoose dotenv cors bcrypt jsonwebtoken
-4. Connect to MongoDB (Atlas) ⌛
+4. Connect to MongoDB (Atlas) ✅
 🔹 Frontend Setup
 5. Create React app (use Vite for speed)
 Install:
