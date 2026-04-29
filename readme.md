@@ -28,10 +28,10 @@ Keep your MVP small.
 npm install express mongoose dotenv cors bcrypt jsonwebtoken
 4. Connect to MongoDB (Atlas) ✅
 🔹 Frontend Setup
-5. Create React app (use Vite for speed)
+5. Create React app (use Vite for speed) ✅
 Install:
 npm install axios react-router-dom tailwindcss
-6. Setup folder structure:
+6. Setup folder structure: ⌛
 /client
 /components
 /pages
