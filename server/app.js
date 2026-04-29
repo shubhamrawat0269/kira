@@ -5,9 +5,7 @@ const app = express();
 
 dotenv.config();
 
-// import userRoutes from "./routes/user.route.js";
-// import videoRoutes from "./routes/video.route.js";
-// import commentRoutes from "./routes/comment.route.js";
+import userRoutes from "./routes/user.route.js";
 
 app.use(
   cors({
@@ -21,8 +19,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use("/api/users", userRoutes);
-// app.use("/api/videos", videoRoutes);
-// app.use("/api/comments", commentRoutes);
+app.use("/api/users", userRoutes);
 
 export default app;

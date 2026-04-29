@@ -40,7 +40,7 @@ npm install axios react-router-dom tailwindcss
 
 🔐 Phase 2: Authentication (Day 2–3)
 Backend
-7. User Model:
+7. User Model: ✅
 name
 email
 password (hashed)

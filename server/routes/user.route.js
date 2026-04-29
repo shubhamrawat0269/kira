@@ -11,38 +11,56 @@ dotenv.config();
 
 router.post("/signup", async (req, res) => {
   try {
-    const { channelName, email, phone, password } = req.body;
+    const { name, email, password } = req.body;
 
-    // 1. Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res
-        .status(400)
-        .json({ status: false, message: "User already exists" });
+    // 1. Validate input
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
     }
 
-    const hashedPwd = await bcrypt.hash(password, 10);
-    // const uploadedImage = await cloudinary.uploader.upload(
-    //   req.files.logo.tempFilePath,
-    // );
+    // 2. Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({
+        status: false,
+        message: "User already exists",
+      });
+    }
 
-    const newUser = new User({
-      _id: new mongoose.Types.ObjectId(),
-      channelName,
+    // 3. Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // 4. Create user
+    const user = await User.create({
+      name,
       email,
-      phone,
-      password: hashedPwd,
+      password: hashedPassword,
     });
-    await newUser.save();
 
+    // 5. Generate token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    // 6. Send response
     res.status(201).json({
       status: true,
       message: "User registered successfully",
-      data: newUser,
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ status: false, message: "Server Error" });
+    res.status(500).json({
+      status: false,
+      message: "Server error",
+      error: error.message,
+    });
   }
 });
 

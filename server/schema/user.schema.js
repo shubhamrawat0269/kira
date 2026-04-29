@@ -2,16 +2,23 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
-    email: {type: String, required: true},
-    channelName: {type: String, required: true},
-    phone: {type: String, required: true},
-    password: {type: String, required: true},
-    logoUrl: {type: String, required: true},
-    logoId: {type: String, required: true},
-    subscribers: {type: Number, default: 0},
-    subscribedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    subscribedChannels: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+      minlength: 6,
+    },
   },
   { timestamps: true },
 );
