@@ -31,7 +31,7 @@ npm install express mongoose dotenv cors bcrypt jsonwebtoken
 5. Create React app (use Vite for speed) ✅
 Install:
 npm install axios react-router-dom tailwindcss
-6. Setup folder structure: ⌛
+6. Setup folder structure: ✅
 /client
 /components
 /pages
