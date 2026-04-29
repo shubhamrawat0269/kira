@@ -98,10 +98,6 @@ router.post("/signin", async (req, res) => {
     const token = jwt.sign(
       {
         userId: user._id,
-        email: user.email,
-        channelName: user.channelName,
-        phone: user.phone,
-        logoId: user.logoId,
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" },
@@ -116,12 +112,6 @@ router.post("/signin", async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        phone: user.phone,
-        channelName: user.channelName,
-        logoId: user.logoId,
-        logoUrl: user.logoUrl,
-        subscribedChannels: user.subscribedChannels,
-        subscribers: user.subscribers,
       },
     });
   } catch (error) {
