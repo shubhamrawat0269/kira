@@ -17,16 +17,16 @@ Keep your MVP small.
 🧱 Phase 1: Project Setup (Day 1–2)
 🔹 Backend Setup
 1. Initialize Node.js + Express ✅
-2. Setup folder structure: ⌛
+2. Setup folder structure: ✅
 /server
 /controllers
 /models
 /routes
 /middlewares
 /config
-3. install:
+3. install: ✅
 npm install express mongoose dotenv cors bcrypt jsonwebtoken
-4. Connect to MongoDB (Atlas)
+4. Connect to MongoDB (Atlas) ⌛
 🔹 Frontend Setup
 5. Create React app (use Vite for speed)
 Install:
