@@ -16,8 +16,8 @@ Keep your MVP small.
 
 🧱 Phase 1: Project Setup (Day 1–2)
 🔹 Backend Setup
-1. Initialize Node.js + Express ⌛
-2. Setup folder structure:
+1. Initialize Node.js + Express ✅
+2. Setup folder structure: ⌛
 /server
 /controllers
 /models
