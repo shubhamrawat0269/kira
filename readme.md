@@ -82,26 +82,26 @@ Get tasks by project
 Update status
 Delete task
 Frontend
-16. Project Detail Page: ⌛
+16. Project Detail Page: ✅
 Show tasks grouped by status
 
 📊 Phase 5: Kanban Board (Core Feature) (Day 6–7)
 
 👉 This is your highlight feature.
 
-17. Frontend
+17. Frontend ✅
 3 Columns:
 To Do
 In Progress
 Done
 Display tasks in each column
 18. OPTIONAL (Keep simple first)
-Drag & Drop (use later)
-library: dnd-kit or react-beautiful-dnd
+Drag & Drop (use later) ⌛
+library: dnd-kit or react-beautiful-dnd 
 
-👉 For now: update status with dropdown/button
+👉 For now: update status with dropdown/button 
 
-👥 Phase 6: Assign Users (Day 7–8)
+👥 Phase 6: Assign Users (Day 7–8)  
 Backend
 19. Add users to project
 Assign tasks

@@ -12,7 +12,7 @@ import projectRoutes from "./routes/project.route.js";
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoutes);
-app.use("/api/task", taskRoutes); 
+app.use("/api/task", taskRoutes);
 app.use("/api/project", projectRoutes);
 
 export default app;
