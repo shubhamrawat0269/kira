@@ -78,4 +78,32 @@ router.patch("/:taskId/status", authMiddleware, async (req, res) => {
   }
 });
 
+router.delete("/:taskId", authMiddleware, async (req, res) => {
+  try {
+    const { taskId } = req.params;
+
+    const task = await Task.findById(taskId);
+
+    if (!task) {
+      return res.status(404).json({
+        status: false,
+        message: "Task not found",
+      });
+    }
+
+    await Task.findByIdAndDelete(taskId);
+
+    res.status(200).json({
+      status: true,
+      message: "Task deleted successfully",
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({
+      status: false,
+      message: "Server error",
+    });
+  }
+});
+
 export default router;
