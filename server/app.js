@@ -6,6 +6,7 @@ const app = express();
 dotenv.config();
 
 import userRoutes from "./routes/user.route.js";
+import taskRoutes from "./routes/task.route.js";
 import projectRoutes from "./routes/project.route.js";
 
 app.use(
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoutes);
+app.use("/api/task", taskRoutes); 
 app.use("/api/project", projectRoutes);
 
 export default app;
