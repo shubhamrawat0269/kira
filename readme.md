@@ -70,13 +70,13 @@ List projects
 Create project modal
 🧩 Phase 4: Task / Issue System (Day 4–6)
 Backend
-14. Task Model: ⌛
+14. Task Model: ✅
 title
 description
 status (todo / in-progress / done)
 projectId
 assignedTo
-15. APIs:
+15. APIs: ⌛
 Create task
 Get tasks by project
 Update status
