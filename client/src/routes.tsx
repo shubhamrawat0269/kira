@@ -3,7 +3,7 @@ import Signin from "./components/custom/Signin";
 import Signup from "./components/custom/Signup";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
 import About from "./pages/About";
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Dashboard />,
       },
       {
         path: "/about",
