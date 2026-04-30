@@ -36,9 +36,10 @@ export default function Login() {
       const res = await api.post(`/api/users/signin`, data);
       if (!res.status) alert(res.data.message);
 
-      // localStorage.setItem("token", JSON.stringify(res.data.token));
-      // localStorage.setItem("userDetails", JSON.stringify(res.data.user));
-      // navigate("/");
+      // console.log(res.data);
+      localStorage.setItem("token", JSON.stringify(res.data.token));
+      localStorage.setItem("userDetails", JSON.stringify(res.data.user));
+      navigate("/");
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Login failed");
     } finally {
