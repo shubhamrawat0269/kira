@@ -61,11 +61,11 @@ Backend
 name
 description
 createdBy
-12. APIs: ⌛
+12. APIs: ✅ 
 Create project
 Get user projects
 Frontend
-13. Dashboard Page:
+13. Dashboard Page: ⌛
 List projects
 Create project modal
 🧩 Phase 4: Task / Issue System (Day 4–6)
