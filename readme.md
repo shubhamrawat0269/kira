@@ -52,12 +52,12 @@ Frontend
 Pages:
 Login
 Register
-9. Store token in:
+9. Store token in: ✅
 localStorage (simple approach)
-10. Protect routes (Private Routes)
+10. Protect routes (Private Routes) ✅
 📁 Phase 3: Project Management (Day 3–4)
-Backend
-11. Project Model:
+Backend 
+11. Project Model: ⌛
 name
 description
 createdBy
