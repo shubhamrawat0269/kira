@@ -57,11 +57,11 @@ localStorage (simple approach)
 10. Protect routes (Private Routes) ✅
 📁 Phase 3: Project Management (Day 3–4)
 Backend 
-11. Project Model: ⌛
+11. Project Model: ✅
 name
 description
 createdBy
-12. APIs:
+12. APIs: ⌛
 Create project
 Get user projects
 Frontend
