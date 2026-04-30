@@ -99,11 +99,11 @@ Display tasks in each column
 Drag & Drop (use later) ⌛
 library: dnd-kit or react-beautiful-dnd 
 
-👉 For now: update status with dropdown/button 
+👉 For now: update status with dropdown/button ✅
 
 👥 Phase 6: Assign Users (Day 7–8)  
-Backend
-19. Add users to project
+Backend 
+19. Add users to project ⌛
 Assign tasks
 Frontend
 20. Dropdown to assign user
