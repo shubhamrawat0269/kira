@@ -1,5 +1,104 @@
-const Signup = () => {
-  return <div>Signup</div>;
-};
+import { useState } from "react";
+import api from "@/lib/api";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export default Signup;
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+
+// Zod Schema
+const signupSchema = z.object({
+  name: z.string().min(3, "name must be at least 3 characters"),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+export default function Signup() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signupSchema),
+  });
+
+  const onSubmit = async (data: any) => {
+    try {
+      setLoading(true);
+      const res = await api.post(`/api/users/signup`, data);
+      if (!res.status) toast.error(res.data.message);
+      navigate("/signin");
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.response?.data?.message || "Signup failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-muted">
+      <Card className="w-full max-w-md shadow-xl rounded-2xl">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl font-bold">
+            Create your account
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Name */}
+            <div className="space-y-1">
+              <Label>Name</Label>
+              <Input placeholder="Enter name" {...register("name")} />
+              {errors.name && (
+                <p className="text-sm text-red-500">{errors.name.message}</p>
+              )}
+            </div>
+
+            {/* Email */}
+            <div className="space-y-1">
+              <Label>Email</Label>
+              <Input
+                type="email"
+                placeholder="Enter email"
+                {...register("email")}
+              />
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email.message}</p>
+              )}
+            </div>
+
+            {/* Password */}
+            <div className="space-y-1">
+              <Label>Password</Label>
+              <Input
+                type="password"
+                placeholder="Enter password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <p className="text-sm text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Creating account..." : "Signup"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

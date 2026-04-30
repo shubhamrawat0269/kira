@@ -11,6 +11,7 @@ dotenv.config();
 
 router.post("/signup", async (req, res) => {
   try {
+    console.log(req.body)
     const { name, email, password } = req.body;
 
     // 1. Validate input
