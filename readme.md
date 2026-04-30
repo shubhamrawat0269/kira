@@ -65,12 +65,12 @@ createdBy
 Create project
 Get user projects
 Frontend
-13. Dashboard Page: ⌛
+13. Dashboard Page: ✅
 List projects
 Create project modal
 🧩 Phase 4: Task / Issue System (Day 4–6)
 Backend
-14. Task Model:
+14. Task Model: ⌛
 title
 description
 status (todo / in-progress / done)
