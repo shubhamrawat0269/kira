@@ -6,6 +6,7 @@ const app = express();
 dotenv.config();
 
 import userRoutes from "./routes/user.route.js";
+import projectRoutes from "./routes/project.route.js";
 
 app.use(
   cors({
@@ -20,5 +21,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoutes);
+app.use("/api/project", projectRoutes);
 
 export default app;
