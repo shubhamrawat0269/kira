@@ -76,14 +76,15 @@ description
 status (todo / in-progress / done)
 projectId
 assignedTo
-15. APIs: ⌛
+15. APIs: ✅
 Create task
 Get tasks by project
 Update status
 Delete task
 Frontend
-16. Project Detail Page:
+16. Project Detail Page: ⌛
 Show tasks grouped by status
+
 📊 Phase 5: Kanban Board (Core Feature) (Day 6–7)
 
 👉 This is your highlight feature.
