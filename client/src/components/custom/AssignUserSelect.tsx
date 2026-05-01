@@ -22,7 +22,8 @@ export default function AssignUserSelect({
   assignedTo,
   onAssign,
 }: Props) {
-  const handleAssign = async (userId: string) => {
+  const handleAssign = async (userId: string | null) => {
+    if (!userId) return;
     try {
       await assignTask(taskId, userId);
       onAssign(userId);
@@ -32,7 +33,7 @@ export default function AssignUserSelect({
   };
 
   return (
-    <Select onValueChange={(value) => handleAssign(value)} defaultValue={assignedTo}>
+    <Select onValueChange={handleAssign} defaultValue={assignedTo}>
       <SelectTrigger className="w-full mt-2">
         <SelectValue placeholder="Assign user" />
       </SelectTrigger>
