@@ -109,11 +109,10 @@ Frontend
 Backend
 21. Assign tasks ✅
 Frontend
-21 Dropdown to assign user task ⌛
+21 Dropdown to assign user task ✅
 🚀 Phase 8: Deployment (Day 9–10)
 Backend → Render / Railway
 Frontend → Vercel / Netlify
-MongoDB → Atlas
 ⭐ Phase 9: Add 1–2 Advanced Features (Optional)
 
 ONLY after MVP is done.
