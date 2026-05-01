@@ -107,7 +107,7 @@ Backend
 Frontend 
 20. Implement assign user to project feature on client side ⌛
 Backend
-21. Assign tasks
+21. Assign tasks ⌛
 Frontend
 21 Dropdown to assign user task 
 🚀 Phase 8: Deployment (Day 9–10)
