@@ -5,10 +5,13 @@ import API from "@/lib/api";
 import type { Task } from "@/types/task";
 
 import KanbanColumn from "@/components/custom/kanbanColumn";
+import { Button } from "@/components/ui/button";
+import AddMemberModal from "@/components/custom/AddMemberModal";
 
 export default function ProjectDetail() {
   const { projectId } = useParams<{ projectId: string }>();
-
+  const [members, setMembers] = useState<any[]>([]);
+  const [openMemberModal, setOpenMemberModal] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const fetchTasks = async () => {
@@ -17,6 +20,16 @@ export default function ProjectDetail() {
       setTasks(res.data.tasks);
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const fetchProject = async () => {
+    try {
+      const res = await API.get(`/api/project/${projectId}`);
+      setMembers(res.data?.project?.members || []);
+    } catch (err) {
+      console.error(err);
+      setMembers([]);
     }
   };
 
@@ -35,10 +48,29 @@ export default function ProjectDetail() {
 
   useEffect(() => {
     fetchTasks();
+    fetchProject();
   }, []);
 
   return (
     <div className="p-6">
+      <div className="mb-6">
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-lg font-semibold">Members</h2>
+
+          <Button onClick={() => setOpenMemberModal(true)}>+ Add Member</Button>
+        </div>
+
+        <div className="flex gap-2 flex-wrap">
+          {members.map((m) => (
+            <span
+              key={m.user._id}
+              className="bg-gray-200 px-3 py-1 rounded text-sm"
+            >
+              {m.user.name}
+            </span>
+          ))}
+        </div>
+      </div>
       <h1 className="text-2xl font-bold mb-6">Project Board</h1>
 
       <div className="grid md:grid-cols-3 gap-4">
@@ -63,6 +95,13 @@ export default function ProjectDetail() {
           onStatusChange={updateStatus}
         />
       </div>
+
+      <AddMemberModal
+        open={openMemberModal}
+        setOpen={setOpenMemberModal}
+        projectId={projectId!}
+        onSuccess={fetchProject}
+      />
     </div>
   );
 }
