@@ -23,3 +23,12 @@ export interface FormState {
   name: string;
   description: string;
 }
+
+export interface Member {
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  role: "admin" | "member";
+}

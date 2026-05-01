@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 
 import API from "@/lib/api";
 import type { Task } from "@/types/task";
-
+import type { Member } from "@/types/project";
 import KanbanColumn from "@/components/custom/kanbanColumn";
 import { Button } from "@/components/ui/button";
 import AddMemberModal from "@/components/custom/AddMemberModal";
 
 export default function ProjectDetail() {
   const { projectId } = useParams<{ projectId: string }>();
-  const [members, setMembers] = useState<any[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [openMemberModal, setOpenMemberModal] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -21,6 +21,19 @@ export default function ProjectDetail() {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleAssign = (taskId: string, userId: string) => {
+    setTasks((prev) =>
+      prev.map((t) =>
+        t._id === taskId
+          ? {
+              ...t,
+              assignedTo: members.find((m) => m.user._id === userId)?.user,
+            }
+          : t,
+      ),
+    );
   };
 
   const fetchProject = async () => {
@@ -78,21 +91,27 @@ export default function ProjectDetail() {
           title="Todo"
           status="todo"
           tasks={tasks}
+          members={members}
           onStatusChange={updateStatus}
+          onAssign={handleAssign}
         />
 
         <KanbanColumn
           title="In Progress"
           status="in-progress"
           tasks={tasks}
+          members={members}
           onStatusChange={updateStatus}
+          onAssign={handleAssign}
         />
 
         <KanbanColumn
           title="Done"
           status="done"
           tasks={tasks}
+          members={members}
           onStatusChange={updateStatus}
+          onAssign={handleAssign}
         />
       </div>
 
