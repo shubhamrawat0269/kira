@@ -102,7 +102,7 @@ router.post(
   },
 );
 
-router.get("/get-project", authMiddleware, async (req, res) => {
+router.get("/get-projects", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.userId;
 
@@ -124,5 +124,38 @@ router.get("/get-project", authMiddleware, async (req, res) => {
     });
   }
 });
+
+router.get(
+  "/:projectId",
+  authMiddleware,
+  async (req, res) => async (req, res) => {
+    try {
+      const { projectId } = req.params;
+
+      const project = await Project.findById(projectId).populate(
+        "members.user",
+        "name email",
+      );
+
+      if (!project) {
+        return res.status(404).json({
+          status: false,
+          message: "Project not found",
+        });
+      }
+
+      res.status(200).json({
+        status: true,
+        project,
+      });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({
+        status: false,
+        message: "Server error",
+      });
+    }
+  },
+);
 
 export default router;
