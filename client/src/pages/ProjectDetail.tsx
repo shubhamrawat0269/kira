@@ -7,12 +7,14 @@ import type { Member } from "@/types/project";
 import KanbanColumn from "@/components/custom/kanbanColumn";
 import { Button } from "@/components/ui/button";
 import AddMemberModal from "@/components/custom/AddMemberModal";
+import CreateTaskModal from "@/components/custom/CreateTaskModal";
 
 export default function ProjectDetail() {
   const { projectId } = useParams<{ projectId: string }>();
   const [members, setMembers] = useState<Member[]>([]);
   const [openMemberModal, setOpenMemberModal] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [openTaskModal, setOpenTaskModal] = useState(false);
 
   const fetchTasks = async () => {
     try {
@@ -66,6 +68,12 @@ export default function ProjectDetail() {
 
   return (
     <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Project Board</h1>
+
+        <Button onClick={() => setOpenTaskModal(true)}>+ Create Task</Button>
+      </div>
+
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-lg font-semibold">Members</h2>
@@ -120,6 +128,13 @@ export default function ProjectDetail() {
         setOpen={setOpenMemberModal}
         projectId={projectId!}
         onSuccess={fetchProject}
+      />
+
+      <CreateTaskModal
+        open={openTaskModal}
+        setOpen={setOpenTaskModal}
+        projectId={projectId!}
+        onSuccess={fetchTasks}
       />
     </div>
   );
