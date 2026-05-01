@@ -111,7 +111,7 @@ Backend
 Frontend
 21 Dropdown to assign user task ✅
 🚀 Phase 8: Deployment (Day 9–10)
-Backend → Render / Railway
+Backend → Render / Railway ✅
 Frontend → Vercel / Netlify
 ⭐ Phase 9: Add 1–2 Advanced Features (Optional)
 
