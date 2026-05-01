@@ -105,11 +105,11 @@ library: dnd-kit or react-beautiful-dnd
 Backend 
 19. Add users to project by Admin ✅
 Frontend 
-20. Implement assign user to project feature on client side ⌛
+20. Implement assign user to project feature on client side ✅
 Backend
-21. Assign tasks ⌛
+21. Assign tasks ✅
 Frontend
-21 Dropdown to assign user task 
+21 Dropdown to assign user task ⌛
 🚀 Phase 8: Deployment (Day 9–10)
 Backend → Render / Railway
 Frontend → Vercel / Netlify
