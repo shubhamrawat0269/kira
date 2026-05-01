@@ -103,19 +103,13 @@ library: dnd-kit or react-beautiful-dnd
 
 👥 Phase 6: Assign Users (Day 7–8)  
 Backend 
-19. Add users to project ⌛
-Assign tasks
+19. Add users to project by Admin ✅
+Frontend 
+20. Implement assign user to project feature on client side ⌛
+Backend
+21. Assign tasks
 Frontend
-20. Dropdown to assign user
-🎨 Phase 7: UI Polish (Day 8–9)
-21. Tailwind improvements:
-Clean cards
-Sidebar navigation
-Header
-Add:
-Loader
-Empty states
-Toast notifications
+21 Dropdown to assign user task 
 🚀 Phase 8: Deployment (Day 9–10)
 Backend → Render / Railway
 Frontend → Vercel / Netlify
