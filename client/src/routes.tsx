@@ -1,13 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Signin from "./components/custom/Signin";
 import Signup from "./components/custom/Signup";
+import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
 import Dashboard from "./pages/Dashboard";
-import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
-import About from "./pages/About";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import ProjectDetail from "./pages/ProjectDetail";
+import LandingPage from "./pages/LandingPage";
+
+const isLoggedIn = !!localStorage.getItem("token");
 
 const router = createBrowserRouter([
   {
@@ -16,13 +19,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Dashboard />,
+        element: isLoggedIn ? <Navigate to="/dashboard" /> : <LandingPage />,
       },
       {
-        path: "/about",
+        path: "/dashboard",
         element: (
           <ProtectedRoute>
-            <About />
+            <Dashboard />
           </ProtectedRoute>
         ),
       },

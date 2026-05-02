@@ -39,7 +39,7 @@ export default function Login() {
       // console.log(res.data);
       localStorage.setItem("token", JSON.stringify(res.data.token));
       localStorage.setItem("userDetails", JSON.stringify(res.data.user));
-      navigate("/");
+      navigate("/dashboard");
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Login failed");
     } finally {
