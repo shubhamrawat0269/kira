@@ -23,10 +23,10 @@ function DashboardLayout() {
   return (
     <div className="min-h-screen">
       {/* Navbar Section Here */}
-      <div className="flex justify-between items-center p-6">
+      <div className="flex justify-between items-center px-6 py-4">
         <h1 className="text-xl font-bold">KIRA</h1>
 
-        <div className="space-x-2">
+        <div className="space-x-2"> 
           {token ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
