@@ -113,16 +113,9 @@ Frontend
 🚀 Phase 8: Deployment (Day 9–10)
 Backend → Render / Railway ✅
 Frontend → Vercel / Netlify
-⭐ Phase 9: Add 1–2 Advanced Features (Optional)
+⭐ Phase 9: Add 1–2 Advanced Features
+Frontend
+1. Dashboard UI when user not logged in. 
+2. Include toast notifications for notify user when api failed/success.
 
-ONLY after MVP is done.
 
-Pick any 1–2:
-
-Drag & Drop
-Comments on tasks
-Due dates
-Priority (Low, Medium, High)
-Search & Filter
-
-👉 Don’t add everything.
