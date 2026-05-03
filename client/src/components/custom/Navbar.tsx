@@ -38,10 +38,10 @@ export default function Navbar({ toggleSidebar }: NavbarProps) {
         >
           <Wheat className="h-6 w-6" />
         </Button>
-        <h1 className="text-xl font-bold hidden sm:block">Kira.</h1>
+        <h1 className="text-xl font-bold">Kira.</h1>
       </div>
 
-      <div className="flex-1 max-w-225 hidden md:flex items-center">
+      <div className="flex-1 max-w-225 hidden lg:flex items-center">
         <Input placeholder="Search" className="rounded-none" />
         <Button
           variant="secondary"

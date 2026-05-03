@@ -7,6 +7,7 @@ import CreateProjectModal from "@/components/custom/CreateProjectModal";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setOpenProjectCreationModal } from "@/store/slices/projectSlice";
 import type { GetProjectsResponse, Project } from "@/types/project";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Dashboard() {
   const dispatch = useAppDispatch();
@@ -37,20 +38,27 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-gray-500 text-base">
-            Manage your projects and tasks
+          <h1 className="text-gray-500 text-xl sm:text-base text-center sm:text-left">
+            Manage your projects and tasks effectively {" "}
+            <span className="sm:hidden">using kira.</span>
           </h1>
+          <div className="flex items-center flex-col gap-2 py-4 sm:hidden">
+            <Button>Create Space</Button>
+            <p className="text-sm">View Space</p>
+          </div>
         </div>
 
-        <p className="text-sm hover:underline transition cursor-pointer">View All Spaces</p>
+        <p className="hidden sm:block text-sm hover:underline transition cursor-pointer">
+          View All Spaces
+        </p>
       </div>
 
       {loading ? (
         <div className="grid md:grid-cols-5 gap-6">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(4)].map((_, i) => (
             <div
               key={i}
-              className="h-56 bg-gray-200 animate-pulse rounded-lg"
+              className="h-20 bg-gray-200 animate-pulse rounded-lg"
             />
           ))}
         </div>
@@ -67,7 +75,7 @@ export default function Dashboard() {
           </Button>
         </div>
       ) : (
-        <div className="grid md:grid-cols-5 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {projects.map((project) => (
             <ProjectCard key={project._id} project={project} />
           ))}
