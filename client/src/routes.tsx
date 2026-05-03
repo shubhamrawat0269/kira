@@ -31,6 +31,15 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/project/:projectId",
+        element: (
+          <ProtectedRoute>
+            <ProjectDetail />
+          </ProtectedRoute>
+        ),
+        children: [],
+      },
     ],
   },
   {
@@ -39,15 +48,6 @@ const router = createBrowserRouter([
       <PublicRoute>
         <Signin />
       </PublicRoute>
-    ),
-    children: [],
-  },
-  {
-    path: "/project/:projectId",
-    element: (
-      <ProtectedRoute>
-        <ProjectDetail />
-      </ProtectedRoute>
     ),
     children: [],
   },
