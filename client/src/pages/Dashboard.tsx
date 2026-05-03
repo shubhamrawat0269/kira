@@ -4,12 +4,14 @@ import API from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/custom/ProjectCard";
 import CreateProjectModal from "@/components/custom/CreateProjectModal";
-
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setOpenProjectCreationModal } from "@/store/slices/projectSlice";
 import type { GetProjectsResponse, Project } from "@/types/project";
 
 export default function Dashboard() {
+  const dispatch = useAppDispatch();
+  const { openProjectCreationModal } = useAppSelector((state) => state.project);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchProjects = async () => {
@@ -40,7 +42,9 @@ export default function Dashboard() {
           </h1>
         </div>
 
-        <Button onClick={() => setOpen(true)}>+ Create Project</Button>
+        <Button onClick={() => dispatch(setOpenProjectCreationModal(true))}>
+          + Create Project
+        </Button>
       </div>
 
       {loading ? (
@@ -74,8 +78,8 @@ export default function Dashboard() {
 
       {/* Modal */}
       <CreateProjectModal
-        open={open}
-        setOpen={setOpen}
+        open={openProjectCreationModal}
+        setOpen={(open) => dispatch(setOpenProjectCreationModal(open))}
         onSuccess={fetchProjects}
       />
     </div>
