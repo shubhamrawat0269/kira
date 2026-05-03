@@ -22,13 +22,13 @@ function Sidebar({ isOpen }: SidebarProps) {
       <SidebarItem
         icon={<CircleUserRound size={20} />}
         label="For You"
-        link={"/"}
+        link={"/dashboard"}
         isOpen={isOpen}
       />
       <SidebarItem
         icon={<Orbit size={20} />}
         label="Spaces"
-        link={"/my-videos"}
+        link={"/dashbaord"}
         isOpen={isOpen}
       />
     </aside>

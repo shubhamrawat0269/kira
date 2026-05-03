@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "@/components/custom/Sidebar";
 
 function DashboardLayout() {
+  const token = JSON.parse(localStorage.getItem("token") || "null");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
@@ -13,7 +14,7 @@ function DashboardLayout() {
       {/* Body */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <Sidebar isOpen={isSidebarOpen} />
+        {token && <Sidebar isOpen={isSidebarOpen} />}
         <main className="flex-1 p-4 overflow-y-auto">
           <Outlet />
         </main>
