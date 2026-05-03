@@ -11,6 +11,7 @@ export default function Dashboard() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+
   const fetchProjects = async () => {
     setLoading(true);
     try {
