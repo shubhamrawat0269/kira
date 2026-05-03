@@ -1,5 +1,8 @@
+import { useAppDispatch } from "@/store/hooks";
 import { CircleUserRound, Orbit, Plus, MoreHorizontal } from "lucide-react";
 import { NavLink } from "react-router-dom";
+
+import { setOpenProjectCreationModal } from "@/store/slices/projectSlice";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -29,6 +32,8 @@ function SidebarItem({ icon, label, isOpen, link }: SidebarItemProps) {
 }
 
 const SideMenu = ({ isOpen }: SidebarProps) => {
+  const dispatch = useAppDispatch();
+
   return (
     <aside
       className={`bg-background border-r h-full p-3 space-y-2 transition-all duration-300 ${
@@ -54,7 +59,7 @@ const SideMenu = ({ isOpen }: SidebarProps) => {
               <Plus
                 size={16}
                 className="cursor-pointer hover:text-black"
-                onClick={() => alert("Create Space")}
+                onClick={() => dispatch(setOpenProjectCreationModal(true))}
               />
               <MoreHorizontal
                 size={16}

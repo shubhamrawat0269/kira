@@ -37,14 +37,12 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-gray-500 text-lg">
+          <h1 className="text-gray-500 text-base">
             Manage your projects and tasks
           </h1>
         </div>
 
-        <Button onClick={() => dispatch(setOpenProjectCreationModal(true))}>
-          + Create Project
-        </Button>
+        <p className="text-sm hover:underline transition cursor-pointer">View All Spaces</p>
       </div>
 
       {loading ? (
