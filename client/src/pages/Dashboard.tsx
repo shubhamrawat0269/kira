@@ -34,10 +34,9 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-gray-500 text-sm">
+          <h1 className="text-gray-500 text-lg">
             Manage your projects and tasks
-          </p>
+          </h1>
         </div>
 
         <Button onClick={() => setOpen(true)}>+ Create Project</Button>

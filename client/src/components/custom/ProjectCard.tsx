@@ -9,17 +9,16 @@ interface Props {
 export default function ProjectCard({ project }: Props) {
   const navigate = useNavigate();
 
-  console.log(project)
-
   function handleNaviateToProjectDetail(id: string) {
     navigate(`/project/${id}`);
   }
+  
   return (
     <Card
-      className="group cursor-pointer transition-all hover:shadow-xl hover:-translate-y-1 border"
+      className="group cursor-pointer border rounded-sm"
       onClick={() => handleNaviateToProjectDetail(project._id)}
     >
-      <CardContent className="p-5">
+      <CardContent>
         <div>
           <h2 className="text-base font-semibold group-hover:text-blue-600 transition">
             {project.name}
