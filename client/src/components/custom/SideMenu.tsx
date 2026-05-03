@@ -36,7 +36,7 @@ const SideMenu = ({ isOpen }: SidebarProps) => {
 
   return (
     <aside
-      className={`bg-background border-r h-full p-3 space-y-2 transition-all duration-300 ${
+      className={`bg-background border-r p-3 space-y-2 transition-all duration-300 ${
         isOpen ? "w-60" : "w-16"
       }`}
     >

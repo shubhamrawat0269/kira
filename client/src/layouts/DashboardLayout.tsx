@@ -8,7 +8,7 @@ function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* Navbar Section Here */}
       <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
       {/* Body */}
