@@ -9,6 +9,7 @@ import PublicRoute from "./routes/PublicRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProjectDetail from "./pages/ProjectDetail";
 import LandingPage from "./pages/LandingPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const isLoggedIn = !!localStorage.getItem("token");
 
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <DashboardLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "",

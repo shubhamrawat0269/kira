@@ -28,7 +28,7 @@ function Sidebar({ isOpen }: SidebarProps) {
       <SidebarItem
         icon={<Orbit size={20} />}
         label="Spaces"
-        link={"/dashbaord"}
+        link={"/dashboard"}
         isOpen={isOpen}
       />
     </aside>
