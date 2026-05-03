@@ -8,13 +8,15 @@ import KanbanColumn from "@/components/custom/kanbanColumn";
 import { Button } from "@/components/ui/button";
 import AddMemberModal from "@/components/custom/AddMemberModal";
 import CreateTaskModal from "@/components/custom/CreateTaskModal";
+import { setOpenTaskModal } from "@/store/slices/projectSlice";
+import { useAppSelector } from "@/store/hooks";
 
 export default function ProjectDetail() {
+  const { openTaskModal } = useAppSelector((state) => state.project);
   const { projectId } = useParams<{ projectId: string }>();
   const [members, setMembers] = useState<Member[]>([]);
   const [openMemberModal, setOpenMemberModal] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [openTaskModal, setOpenTaskModal] = useState(false);
 
   const fetchTasks = async () => {
     try {
@@ -69,9 +71,10 @@ export default function ProjectDetail() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Project Board</h1>
-
-        <Button onClick={() => setOpenTaskModal(true)}>+ Create Task</Button>
+        <div className="flex justify-between flex-col mb-6">
+          <p className="text-sm">Spaces</p>
+          <h1 className="text-2xl font-bold">My Project Space</h1>
+        </div>
       </div>
 
       <div className="mb-6">
@@ -94,7 +97,7 @@ export default function ProjectDetail() {
       </div>
       <h1 className="text-2xl font-bold mb-6">Project Board</h1>
 
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-4 gap-4">
         <KanbanColumn
           title="Todo"
           status="todo"
@@ -107,6 +110,15 @@ export default function ProjectDetail() {
         <KanbanColumn
           title="In Progress"
           status="in-progress"
+          tasks={tasks}
+          members={members}
+          onStatusChange={updateStatus}
+          onAssign={handleAssign}
+        />
+
+        <KanbanColumn
+          title="In Review"
+          status="done"
           tasks={tasks}
           members={members}
           onStatusChange={updateStatus}

@@ -7,7 +7,6 @@ import CreateProjectModal from "@/components/custom/CreateProjectModal";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setOpenProjectCreationModal } from "@/store/slices/projectSlice";
 import type { GetProjectsResponse, Project } from "@/types/project";
-import { ArrowUpRight } from "lucide-react";
 
 export default function Dashboard() {
   const dispatch = useAppDispatch();
