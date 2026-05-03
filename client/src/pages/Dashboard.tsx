@@ -81,14 +81,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
-{
-  /* <h2 className="text-lg font-semibold mb-2">No projects yet</h2>
-          <p className="text-gray-500 mb-4">
-            Start by creating your first project
-          </p>
-
-          <Button onClick={() => {alert('Feature yet to be implemented')}}>
-            Create Project
-          </Button> */
-}

@@ -36,6 +36,7 @@ export default function Signup() {
       const res = await api.post(`/api/users/signup`, data);
       if (!res.status) toast.error(res.data.message);
       navigate("/signin");
+      toast.success(res.data.message || "Account Created successful");
     } catch (error: any) {
       console.error(error);
       toast.error(error?.response?.data?.message || "Signup failed");

@@ -34,12 +34,13 @@ export default function Login() {
       setLoading(true);
 
       const res = await api.post(`/api/users/signin`, data);
-      if (!res.status) alert(res.data.message);
+      if (!res.status) toast.error(res.data.message);
 
       // console.log(res.data);
       localStorage.setItem("token", JSON.stringify(res.data.token));
       localStorage.setItem("userDetails", JSON.stringify(res.data.user));
       navigate("/dashboard");
+      toast.success(res.data.message || "Login successful");
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Login failed");
     } finally {
