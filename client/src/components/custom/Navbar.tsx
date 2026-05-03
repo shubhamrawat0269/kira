@@ -41,7 +41,7 @@ export default function Navbar({ toggleSidebar }: NavbarProps) {
         <h1 className="text-xl font-bold hidden sm:block">Kira.</h1>
       </div>
 
-      <div className="flex-1 max-w-xl mx-4 hidden md:flex items-center">
+      <div className="flex-1 max-w-225 hidden md:flex items-center">
         <Input placeholder="Search" className="rounded-none" />
         <Button
           variant="secondary"
