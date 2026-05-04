@@ -30,14 +30,6 @@ export default function KanbanColumn({
     >
       <h2 className="font-semibold mb-3">{title}</h2>
 
-      {title === "Todo" && (
-        <Button
-          onClick={() => dispatch(setOpenTaskModal(true))}
-          className="bg-transparent text-gray-400 hover:bg-gray-200 transition-all hover:text-black w-full px-2 py-5 cursor-pointer rounded-none"
-        >
-          + Create Task
-        </Button>
-      )}
       {tasks
         .filter((task) => task.status === status)
         .map((task) => (
@@ -49,6 +41,15 @@ export default function KanbanColumn({
             onAssign={onAssign}
           />
         ))}
+
+      {title === "Todo" && (
+        <Button
+          onClick={() => dispatch(setOpenTaskModal(true))}
+          className="bg-transparent text-gray-400 hover:bg-gray-200 transition-all hover:text-black w-full px-2 py-5 cursor-pointer rounded-none"
+        >
+          + Create Task
+        </Button>
+      )}
     </div>
   );
 }
