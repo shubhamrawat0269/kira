@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import JiraProjectImage from "@/assets/jira-project-icon.svg";
 import API from "@/lib/api";
 import type { Task } from "@/types/task";
-import type { Member } from "@/types/project";
+import type { Member, Project } from "@/types/project";
 import KanbanColumn from "@/components/custom/kanbanColumn";
 import { Button } from "@/components/ui/button";
 import AddMemberModal from "@/components/custom/AddMemberModal";
@@ -15,6 +16,7 @@ export default function ProjectDetail() {
   const { openTaskModal } = useAppSelector((state) => state.project);
   const { projectId } = useParams<{ projectId: string }>();
   const [members, setMembers] = useState<Member[]>([]);
+  const [project, setProject] = useState<Project>({});
   const [openMemberModal, setOpenMemberModal] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -43,6 +45,7 @@ export default function ProjectDetail() {
   const fetchProject = async () => {
     try {
       const res = await API.get(`/api/project/${projectId}`);
+      setProject(res.data.project);
       setMembers(res.data?.project?.members || []);
     } catch (err) {
       console.error(err);
@@ -73,7 +76,12 @@ export default function ProjectDetail() {
       <div className="flex justify-between items-center mb-6">
         <div className="flex justify-between flex-col mb-6">
           <p className="text-sm">Spaces</p>
-          <h1 className="text-2xl font-bold">My Project Space</h1>
+          <div className="flex items-center gap-2 py-2">
+            <img src={JiraProjectImage} alt="Logo" className="w-8 h-8" />
+            <h1 className="text-xl font-bold">
+              {project?.name || "My Project Space"}
+            </h1>
+          </div>
         </div>
       </div>
 
