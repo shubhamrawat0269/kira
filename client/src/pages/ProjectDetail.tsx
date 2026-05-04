@@ -10,11 +10,12 @@ import { Button } from "@/components/ui/button";
 import AddMemberModal from "@/components/custom/AddMemberModal";
 import CreateTaskModal from "@/components/custom/CreateTaskModal";
 import { setOpenTaskModal } from "@/store/slices/projectSlice";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import TopBar from "@/components/custom/TopBar";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export default function ProjectDetail() {
+  const dispatch = useAppDispatch();
   const { openTaskModal } = useAppSelector((state) => state.project);
   const { projectId } = useParams<{ projectId: string }>();
   const [members, setMembers] = useState<Member[]>([]);
@@ -168,7 +169,7 @@ export default function ProjectDetail() {
 
       <CreateTaskModal
         open={openTaskModal}
-        setOpen={setOpenTaskModal}
+        setOpen={(open) => dispatch(setOpenTaskModal(open))}
         projectId={projectId!}
         onSuccess={fetchTasks}
       />
