@@ -11,6 +11,7 @@ import AddMemberModal from "@/components/custom/AddMemberModal";
 import CreateTaskModal from "@/components/custom/CreateTaskModal";
 import { setOpenTaskModal } from "@/store/slices/projectSlice";
 import { useAppSelector } from "@/store/hooks";
+import TopBar from "@/components/custom/TopBar";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export default function ProjectDetail() {
@@ -114,6 +115,10 @@ export default function ProjectDetail() {
           </div>
         </TabsContent>
         <TabsContent value="board">
+          <TopBar
+            onSearch={(value) => console.log(value)}
+            onFilterClick={() => console.log("filter clicked")}
+          />
           <div className="grid md:grid-cols-4 gap-4">
             <KanbanColumn
               title="Todo"
