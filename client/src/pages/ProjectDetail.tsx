@@ -16,7 +16,7 @@ export default function ProjectDetail() {
   const { openTaskModal } = useAppSelector((state) => state.project);
   const { projectId } = useParams<{ projectId: string }>();
   const [members, setMembers] = useState<Member[]>([]);
-  const [project, setProject] = useState<Project>({});
+  const [project, setProject] = useState<Project | null>(null);
   const [openMemberModal, setOpenMemberModal] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
 
