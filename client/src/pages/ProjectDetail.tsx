@@ -11,6 +11,7 @@ import AddMemberModal from "@/components/custom/AddMemberModal";
 import CreateTaskModal from "@/components/custom/CreateTaskModal";
 import { setOpenTaskModal } from "@/store/slices/projectSlice";
 import { useAppSelector } from "@/store/hooks";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export default function ProjectDetail() {
   const { openTaskModal } = useAppSelector((state) => state.project);
@@ -73,8 +74,8 @@ export default function ProjectDetail() {
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex justify-between flex-col mb-6">
+      <div className="flex justify-between items-center pb-1">
+        <div className="flex justify-between flex-col">
           <p className="text-sm">Spaces</p>
           <div className="flex items-center gap-2 py-2">
             <img src={JiraProjectImage} alt="Logo" className="w-8 h-8" />
@@ -85,63 +86,73 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <h2 className="text-lg font-semibold">Members</h2>
+      <Tabs defaultValue="board">
+        <TabsList variant="line">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="board">Board</TabsTrigger>
+        </TabsList>
+        <TabsContent value="overview">
+          <div className="mb-6">
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-lg font-semibold">Members</h2>
 
-          <Button onClick={() => setOpenMemberModal(true)}>+ Add Member</Button>
-        </div>
+              <Button onClick={() => setOpenMemberModal(true)}>
+                + Add Member
+              </Button>
+            </div>
 
-        <div className="flex gap-2 flex-wrap">
-          {members.map((m) => (
-            <span
-              key={m.user._id}
-              className="bg-gray-200 px-3 py-1 rounded text-sm"
-            >
-              {m.user.name}
-            </span>
-          ))}
-        </div>
-      </div>
-      <h1 className="text-2xl font-bold mb-6">Project Board</h1>
+            <div className="flex gap-2 flex-wrap">
+              {members.map((m) => (
+                <span
+                  key={m.user._id}
+                  className="bg-gray-200 px-3 py-1 rounded text-sm"
+                >
+                  {m.user.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="board">
+          <div className="grid md:grid-cols-4 gap-4">
+            <KanbanColumn
+              title="Todo"
+              status="todo"
+              tasks={tasks}
+              members={members}
+              onStatusChange={updateStatus}
+              onAssign={handleAssign}
+            />
 
-      <div className="grid md:grid-cols-4 gap-4">
-        <KanbanColumn
-          title="Todo"
-          status="todo"
-          tasks={tasks}
-          members={members}
-          onStatusChange={updateStatus}
-          onAssign={handleAssign}
-        />
+            <KanbanColumn
+              title="In Progress"
+              status="in-progress"
+              tasks={tasks}
+              members={members}
+              onStatusChange={updateStatus}
+              onAssign={handleAssign}
+            />
 
-        <KanbanColumn
-          title="In Progress"
-          status="in-progress"
-          tasks={tasks}
-          members={members}
-          onStatusChange={updateStatus}
-          onAssign={handleAssign}
-        />
+            <KanbanColumn
+              title="In Review"
+              status="done"
+              tasks={tasks}
+              members={members}
+              onStatusChange={updateStatus}
+              onAssign={handleAssign}
+            />
 
-        <KanbanColumn
-          title="In Review"
-          status="done"
-          tasks={tasks}
-          members={members}
-          onStatusChange={updateStatus}
-          onAssign={handleAssign}
-        />
-
-        <KanbanColumn
-          title="Done"
-          status="done"
-          tasks={tasks}
-          members={members}
-          onStatusChange={updateStatus}
-          onAssign={handleAssign}
-        />
-      </div>
+            <KanbanColumn
+              title="Done"
+              status="done"
+              tasks={tasks}
+              members={members}
+              onStatusChange={updateStatus}
+              onAssign={handleAssign}
+            />
+          </div>
+        </TabsContent>
+      </Tabs>
 
       <AddMemberModal
         open={openMemberModal}
