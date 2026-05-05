@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 interface Props {
   open: boolean;
@@ -27,13 +28,15 @@ export default function AddMemberModal({
 
   const handleAddUser = async () => {
     try {
-      await addUserToProject(projectId, email);
-
+      const res = await addUserToProject(projectId, email);
+      // console.log(res.data);
+      toast.success(res.data.message || "User added successfully!");
       setEmail("");
       setOpen(false);
       onSuccess();
     } catch (err) {
       console.error(err);
+      toast.error("Failed to add user. Please check the email and try again.");
     }
   };
 
