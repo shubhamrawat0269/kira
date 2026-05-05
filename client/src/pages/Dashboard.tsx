@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/custom/ProjectCard";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setLoading, setProjects } from "@/store/slices/projectSlice";
-import type { GetProjectsResponse, Project } from "@/types/project";
+import type { GetProjectsResponse } from "@/types/project";
 
 export default function Dashboard() {
   const dispatch = useAppDispatch();
