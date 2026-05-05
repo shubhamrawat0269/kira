@@ -1,30 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import API from "@/lib/api";
 
 import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/custom/ProjectCard";
-import CreateProjectModal from "@/components/custom/CreateProjectModal";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setOpenProjectCreationModal } from "@/store/slices/projectSlice";
+import { setLoading, setProjects } from "@/store/slices/projectSlice";
 import type { GetProjectsResponse, Project } from "@/types/project";
 
 export default function Dashboard() {
   const dispatch = useAppDispatch();
-  const { openProjectCreationModal } = useAppSelector((state) => state.project);
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { projects, loading } = useAppSelector((state) => state.project);
 
   const fetchProjects = async () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     try {
-      const res = await API.get<GetProjectsResponse>(
-        "/api/project/get-projects",
-      );
-      setProjects(res.data.projects);
+      const res = await API.get<GetProjectsResponse>("/api/project/get-projects");
+      dispatch(setProjects(res.data.projects));
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
@@ -81,12 +76,6 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Modal */}
-      <CreateProjectModal
-        open={openProjectCreationModal}
-        setOpen={(open) => dispatch(setOpenProjectCreationModal(open))}
-        onSuccess={fetchProjects}
-      />
     </div>
   );
 }

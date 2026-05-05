@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useAppDispatch } from "@/store/hooks";
+import { addProject } from "@/store/slices/projectSlice";
 import type { CreateProjectModalProps, FormState } from "@/types/project";
 
 export default function CreateProjectModal({
@@ -17,6 +19,7 @@ export default function CreateProjectModal({
   setOpen,
   onSuccess,
 }: CreateProjectModalProps) {
+  const dispatch = useAppDispatch();
   const [form, setForm] = useState<FormState>({
     name: "",
     description: "",
@@ -24,12 +27,16 @@ export default function CreateProjectModal({
 
   const handleCreate = async () => {
     try {
-      await API.post("/api/project/create-project", form);
+      const res = await API.post("/api/project/create-project", form);
+
+      if (res?.data?.project) {
+        dispatch(addProject(res.data.project));
+      }
 
       setOpen(false);
       setForm({ name: "", description: "" });
 
-      onSuccess();
+      onSuccess?.();
     } catch (err) {
       console.error(err);
     }

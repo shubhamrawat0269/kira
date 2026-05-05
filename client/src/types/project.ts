@@ -16,7 +16,7 @@ export interface GetProjectsResponse {
 export interface CreateProjectModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 
 export interface FormState {
