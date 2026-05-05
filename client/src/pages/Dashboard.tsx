@@ -14,7 +14,9 @@ export default function Dashboard() {
   const fetchProjects = async () => {
     dispatch(setLoading(true));
     try {
-      const res = await API.get<GetProjectsResponse>("/api/project/get-projects");
+      const res = await API.get<GetProjectsResponse>(
+        "/api/project/get-projects",
+      );
       dispatch(setProjects(res.data.projects));
     } catch (err) {
       console.error(err);
@@ -33,7 +35,7 @@ export default function Dashboard() {
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-gray-500 text-xl sm:text-base text-center sm:text-left">
-            Manage your projects and tasks effectively {" "}
+            Manage your projects and tasks effectively{" "}
             <span className="sm:hidden">using kira.</span>
           </h1>
           <div className="flex items-center flex-col gap-2 py-4 sm:hidden">
@@ -75,7 +77,6 @@ export default function Dashboard() {
           ))}
         </div>
       )}
-
     </div>
   );
 }
