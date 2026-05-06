@@ -14,8 +14,8 @@ import { toast } from "sonner";
 interface Props {
   open: boolean;
   setOpen: (open: boolean) => void;
-  projectId: string;
-  onSuccess: () => void;
+  projectId: string | null;
+  onSuccess?: () => void;
 }
 
 export default function AddMemberModal({
@@ -25,18 +25,23 @@ export default function AddMemberModal({
   onSuccess,
 }: Props) {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleAddUser = async () => {
+    if (!projectId) return;
+
+    setLoading(true);
     try {
       const res = await addUserToProject(projectId, email);
-      // console.log(res.data);
       toast.success(res.data.message || "User added successfully!");
       setEmail("");
       setOpen(false);
-      onSuccess();
+      onSuccess?.();
     } catch (err) {
       console.error(err);
       toast.error("Failed to add user. Please check the email and try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,10 +57,11 @@ export default function AddMemberModal({
             placeholder="Enter user email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
           />
 
-          <Button onClick={handleAddUser} className="w-full">
-            Add User
+          <Button onClick={handleAddUser} disabled={loading} className="w-full">
+            {loading ? "Adding..." : "Add User"}
           </Button>
         </div>
       </DialogContent>

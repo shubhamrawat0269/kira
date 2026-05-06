@@ -1,8 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-
-import { Search, SlidersHorizontal } from "lucide-react";
+import {
+  setOpenMemberModal,
+  setSelectedProjectId,
+} from "@/store/slices/projectSlice";
+import { Search, SlidersHorizontal, User } from "lucide-react";
+import { useAppDispatch } from "@/store/hooks";
+import { useParams } from "react-router-dom";
+import { modalCallbacks } from "@/layouts/DashboardLayout";
 
 type Props = {
   onSearch?: (value: string) => void;
@@ -10,6 +16,19 @@ type Props = {
 };
 
 export default function TopBar({ onSearch, onFilterClick }: Props) {
+  const dispatch = useAppDispatch();
+  const { projectId } = useParams<{ projectId: string }>();
+
+  const handleAddMember = () => {
+    if (projectId) {
+      modalCallbacks.onAddMemberSuccess = () => {
+        // refresh callback can be set by parent
+      };
+      dispatch(setSelectedProjectId(projectId));
+      dispatch(setOpenMemberModal(true));
+    }
+  };
+
   return (
     <div className="flex items-center gap-4 p-3 bg-transparent">
       {/* Left: Search */}
@@ -37,6 +56,15 @@ export default function TopBar({ onSearch, onFilterClick }: Props) {
         >
           <SlidersHorizontal size={16} />
           Filter
+        </Button>
+        {/* Add Member Button */}
+        <Button
+          variant="outline"
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={handleAddMember}
+        >
+          <User size={16} />
+          Add Member
         </Button>
       </div>
     </div>

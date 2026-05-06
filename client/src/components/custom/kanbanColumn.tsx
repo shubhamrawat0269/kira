@@ -2,9 +2,14 @@ import TaskCard from "./TaskCard";
 import { Button } from "../ui/button";
 import type { Task } from "@/types/task";
 import type { Member } from "@/types/project";
-import { setOpenTaskModal } from "@/store/slices/projectSlice";
-import { useDispatch } from "react-redux";
+import {
+  setOpenTaskModal,
+  setSelectedProjectId,
+} from "@/store/slices/projectSlice";
+import { useAppDispatch } from "@/store/hooks";
 import { Skeleton } from "../ui/skeleton";
+import { useParams } from "react-router-dom";
+import { modalCallbacks } from "@/layouts/DashboardLayout";
 
 interface Props {
   title: string;
@@ -23,7 +28,18 @@ export default function KanbanColumn({
   onStatusChange,
   onAssign,
 }: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { projectId } = useParams<{ projectId: string }>();
+
+  const handleCreateTask = () => {
+    if (projectId) {
+      modalCallbacks.onCreateTaskSuccess = () => {
+        // refresh callback can be set by parent
+      };
+      dispatch(setSelectedProjectId(projectId));
+      dispatch(setOpenTaskModal(true));
+    }
+  };
 
   return (
     <div
@@ -49,7 +65,7 @@ export default function KanbanColumn({
 
       {title === "Todo" && (
         <Button
-          onClick={() => dispatch(setOpenTaskModal(true))}
+          onClick={handleCreateTask}
           className="bg-transparent text-gray-400 hover:bg-gray-200 transition-all hover:text-black w-full px-2 py-5 cursor-pointer rounded-none"
         >
           + Create Task

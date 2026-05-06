@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import JiraProjectImage from "@/assets/jira-project-icon.svg";
@@ -6,22 +6,23 @@ import API from "@/lib/api";
 import type { Task } from "@/types/task";
 import type { Member, Project } from "@/types/project";
 import KanbanColumn from "@/components/custom/kanbanColumn";
-import { Button } from "@/components/ui/button";
-import AddMemberModal from "@/components/custom/AddMemberModal";
-import CreateTaskModal from "@/components/custom/CreateTaskModal";
-import { setOpenTaskModal } from "@/store/slices/projectSlice";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import {
+  setOpenTaskModal,
+  setOpenMemberModal,
+  setSelectedProjectId,
+} from "@/store/slices/projectSlice";
+import { useAppDispatch } from "@/store/hooks";
 import TopBar from "@/components/custom/TopBar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { modalCallbacks } from "@/layouts/DashboardLayout";
+import { useState } from "react";
 
 export default function ProjectDetail() {
   const dispatch = useAppDispatch();
-  const { openTaskModal } = useAppSelector((state) => state.project);
   const { projectId } = useParams<{ projectId: string }>();
   const [members, setMembers] = useState<Member[]>([]);
   const [project, setProject] = useState<Project | null>(null);
-  const [openMemberModal, setOpenMemberModal] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const fetchTasks = async () => {
@@ -70,6 +71,18 @@ export default function ProjectDetail() {
     }
   };
 
+  const openAddMemberModal = () => {
+    modalCallbacks.onAddMemberSuccess = fetchProject;
+    dispatch(setSelectedProjectId(projectId!));
+    dispatch(setOpenMemberModal(true));
+  };
+
+  const openCreateTaskModal = () => {
+    modalCallbacks.onCreateTaskSuccess = fetchTasks;
+    dispatch(setSelectedProjectId(projectId!));
+    dispatch(setOpenTaskModal(true));
+  };
+
   useEffect(() => {
     fetchTasks();
     fetchProject();
@@ -108,10 +121,6 @@ export default function ProjectDetail() {
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-lg font-semibold">Members</h2>
-
-              <Button onClick={() => setOpenMemberModal(true)}>
-                + Add Member
-              </Button>
             </div>
 
             <div className="flex gap-2 flex-wrap">
@@ -170,20 +179,6 @@ export default function ProjectDetail() {
           </div>
         </TabsContent>
       </Tabs>
-
-      <AddMemberModal
-        open={openMemberModal}
-        setOpen={setOpenMemberModal}
-        projectId={projectId!}
-        onSuccess={fetchProject}
-      />
-
-      <CreateTaskModal
-        open={openTaskModal}
-        setOpen={(open) => dispatch(setOpenTaskModal(open))}
-        projectId={projectId!}
-        onSuccess={fetchTasks}
-      />
     </div>
   );
 }

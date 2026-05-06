@@ -14,8 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 interface Props {
   open: boolean;
   setOpen: (open: boolean) => void;
-  projectId: string;
-  onSuccess: () => void;
+  projectId: string | null;
+  onSuccess?: () => void;
 }
 
 export default function CreateTaskModal({
@@ -26,10 +26,12 @@ export default function CreateTaskModal({
 }: Props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleCreate = async () => {
-    if (!title) return;
+    if (!title || !projectId) return;
 
+    setLoading(true);
     try {
       await createTask({
         title,
@@ -41,9 +43,11 @@ export default function CreateTaskModal({
       setDescription("");
       setOpen(false);
 
-      onSuccess(); 
+      onSuccess?.();
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,16 +63,18 @@ export default function CreateTaskModal({
             placeholder="Task title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            disabled={loading}
           />
 
           <Textarea
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            disabled={loading}
           />
 
-          <Button onClick={handleCreate} className="w-full">
-            Create Task
+          <Button onClick={handleCreate} disabled={loading} className="w-full">
+            {loading ? "Creating..." : "Create Task"}
           </Button>
         </div>
       </DialogContent>

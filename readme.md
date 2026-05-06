@@ -126,3 +126,4 @@ Frontend
 3. On Hover, underline added on Create Your Account.
 4. User Info Added on Avatar Dropdown.
 5. Onlead , a shimmer skeleton appear first on Project Detail Page.
+6. Add a Member button on TopBar

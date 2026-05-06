@@ -6,13 +6,17 @@ interface ProjectState {
   loading: boolean;
   openProjectCreationModal: boolean;
   openTaskModal: boolean;
+  openMemberModal: boolean;
+  selectedProjectId: string | null;
 }
 
 const initialState: ProjectState = {
   projects: [],
   loading: false,
   openTaskModal: false,
+  openMemberModal: false,
   openProjectCreationModal: false,
+  selectedProjectId: null,
 };
 
 const projectSlice = createSlice({
@@ -34,6 +38,12 @@ const projectSlice = createSlice({
     setOpenTaskModal: (state, action: PayloadAction<boolean>) => {
       state.openTaskModal = action.payload;
     },
+    setOpenMemberModal: (state, action: PayloadAction<boolean>) => {
+      state.openMemberModal = action.payload;
+    },
+    setSelectedProjectId: (state, action: PayloadAction<string | null>) => {
+      state.selectedProjectId = action.payload;
+    },
   },
 });
 
@@ -42,6 +52,8 @@ export const {
   addProject,
   setLoading,
   setOpenTaskModal,
+  setOpenMemberModal,
   setOpenProjectCreationModal,
+  setSelectedProjectId,
 } = projectSlice.actions;
 export default projectSlice.reducer;
