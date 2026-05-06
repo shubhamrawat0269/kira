@@ -1,15 +1,9 @@
 import { Search, Wheat } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
+import UserDropdown from "./UserDropdown";
 
 type NavbarProps = {
   toggleSidebar: () => void;
@@ -54,18 +48,7 @@ export default function Navbar({ toggleSidebar }: NavbarProps) {
 
       <div className="flex items-center gap-3">
         {token ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Avatar className="cursor-pointer">
-                <AvatarImage src="/avatar.png" alt="User Avatar" />
-                <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <UserDropdown user={user} onLogout={handleLogout} />
         ) : (
           <>
             <Button variant="outline" onClick={() => navigate("/signin")}>

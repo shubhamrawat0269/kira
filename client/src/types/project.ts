@@ -24,11 +24,13 @@ export interface FormState {
   description: string;
 }
 
+export interface UserDetail {
+  _id: string;
+  name: string;
+  email: string;
+}
+
 export interface Member {
-  user: {
-    _id: string;
-    name: string;
-    email: string;
-  };
+  user: UserDetail;
   role: "admin" | "member";
 }

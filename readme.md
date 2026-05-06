@@ -119,3 +119,9 @@ Frontend
 2. Include toast notifications for notify user when api failed/success.
 
 
+## Changes To Be Implemented on : 06/05/2026
+
+1. Eye Icon added on Signin Form.
+2. Cursor pointer on Signin Button.
+3. On Hover, underline added on Create Your Account.
+4. User Info Added on Avatar Dropdown.
