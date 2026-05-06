@@ -125,3 +125,4 @@ Frontend
 2. Cursor pointer on Signin Button.
 3. On Hover, underline added on Create Your Account.
 4. User Info Added on Avatar Dropdown.
+5. Onlead , a shimmer skeleton appear first on Project Detail Page.

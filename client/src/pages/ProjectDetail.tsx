@@ -12,6 +12,7 @@ import CreateTaskModal from "@/components/custom/CreateTaskModal";
 import { setOpenTaskModal } from "@/store/slices/projectSlice";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import TopBar from "@/components/custom/TopBar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export default function ProjectDetail() {
@@ -77,15 +78,25 @@ export default function ProjectDetail() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center pb-1">
-        <div className="flex justify-between flex-col">
-          <p className="text-sm">Spaces</p>
-          <div className="flex items-center gap-2 py-2">
-            <img src={JiraProjectImage} alt="Logo" className="w-8 h-8" />
-            <h1 className="text-xl font-bold">
-              {project?.name || "My Project Space"}
-            </h1>
+        {project?.name ? (
+          <div className="flex justify-between flex-col">
+            <p className="text-sm">Spaces</p>
+            <div className="flex items-center gap-2 py-2">
+              <img src={JiraProjectImage} alt="Logo" className="w-8 h-8" />
+              <h1 className="text-xl font-bold">
+                {project?.name || "My Project Space"}
+              </h1>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex justify-between flex-col">
+            <Skeleton className="h-4 w-20 mb-2" />
+            <div className="flex items-center gap-2 py-2">
+              <Skeleton className="w-8 h-8 rounded-md" />
+              <Skeleton className="h-6 w-40" />
+            </div>
+          </div>
+        )}
       </div>
 
       <Tabs defaultValue="board">
