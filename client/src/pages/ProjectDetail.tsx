@@ -6,20 +6,12 @@ import API from "@/lib/api";
 import type { Task } from "@/types/task";
 import type { Member, Project } from "@/types/project";
 import KanbanColumn from "@/components/custom/kanbanColumn";
-import {
-  setOpenTaskModal,
-  setOpenMemberModal,
-  setSelectedProjectId,
-} from "@/store/slices/projectSlice";
-import { useAppDispatch } from "@/store/hooks";
 import TopBar from "@/components/custom/TopBar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { modalCallbacks } from "@/layouts/DashboardLayout";
 import { useState } from "react";
 
 export default function ProjectDetail() {
-  const dispatch = useAppDispatch();
   const { projectId } = useParams<{ projectId: string }>();
   const [members, setMembers] = useState<Member[]>([]);
   const [project, setProject] = useState<Project | null>(null);
@@ -71,18 +63,6 @@ export default function ProjectDetail() {
     }
   };
 
-  const openAddMemberModal = () => {
-    modalCallbacks.onAddMemberSuccess = fetchProject;
-    dispatch(setSelectedProjectId(projectId!));
-    dispatch(setOpenMemberModal(true));
-  };
-
-  const openCreateTaskModal = () => {
-    modalCallbacks.onCreateTaskSuccess = fetchTasks;
-    dispatch(setSelectedProjectId(projectId!));
-    dispatch(setOpenTaskModal(true));
-  };
-
   useEffect(() => {
     fetchTasks();
     fetchProject();
@@ -119,24 +99,13 @@ export default function ProjectDetail() {
         </TabsList>
         <TabsContent value="overview">
           <div className="mb-6">
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-lg font-semibold">Members</h2>
-            </div>
-
-            <div className="flex gap-2 flex-wrap">
-              {members.map((m) => (
-                <span
-                  key={m.user._id}
-                  className="bg-gray-200 px-3 py-1 rounded text-sm"
-                >
-                  {m.user.name}
-                </span>
-              ))}
-            </div>
+            Overview content coming soon! For now, you can view and manage your
+            tasks in the Board tab.
           </div>
         </TabsContent>
         <TabsContent value="board">
           <TopBar
+            members={members}
             onSearch={(value) => console.log(value)}
             onFilterClick={() => console.log("filter clicked")}
           />

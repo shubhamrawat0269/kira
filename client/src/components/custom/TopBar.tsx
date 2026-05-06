@@ -1,21 +1,29 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar";
 import {
   setOpenMemberModal,
   setSelectedProjectId,
 } from "@/store/slices/projectSlice";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { Search, SlidersHorizontal, User } from "lucide-react";
 import { useAppDispatch } from "@/store/hooks";
 import { useParams } from "react-router-dom";
 import { modalCallbacks } from "@/layouts/DashboardLayout";
+import type { Member } from "@/types/project";
 
 type Props = {
+  members: Member[];
   onSearch?: (value: string) => void;
   onFilterClick?: () => void;
 };
 
-export default function TopBar({ onSearch, onFilterClick }: Props) {
+export default function TopBar({ onSearch, onFilterClick, members }: Props) {
   const dispatch = useAppDispatch();
   const { projectId } = useParams<{ projectId: string }>();
 
@@ -44,9 +52,22 @@ export default function TopBar({ onSearch, onFilterClick }: Props) {
       {/* Right Section */}
       <div className="flex items-center gap-3">
         {/* Avatar */}
-        <Avatar className="h-8 w-8">
-          <AvatarFallback>SR</AvatarFallback>
-        </Avatar>
+        <AvatarGroup>
+          {members.map((m) => (
+            <Tooltip>
+              <TooltipTrigger>
+                <Avatar key={m.user._id} className="h-8 w-8">
+                  <AvatarFallback>
+                    {m.user.name.charAt(0) || "U"}
+                  </AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{m.user.name}</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </AvatarGroup>
 
         {/* Filter Button */}
         <Button
