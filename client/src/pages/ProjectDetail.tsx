@@ -92,8 +92,8 @@ export default function ProjectDetail() {
           <div className="flex justify-between flex-col">
             <Skeleton className="h-4 w-20 mb-2" />
             <div className="flex items-center gap-2 py-2">
-              <Skeleton className="w-8 h-8 rounded-md" />
-              <Skeleton className="h-6 w-40" />
+              <Skeleton className="w-7 h-7 rounded-md" />
+              <Skeleton className="h-2 w-40" />
             </div>
           </div>
         )}

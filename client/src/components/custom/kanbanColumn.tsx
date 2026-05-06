@@ -4,6 +4,7 @@ import type { Task } from "@/types/task";
 import type { Member } from "@/types/project";
 import { setOpenTaskModal } from "@/store/slices/projectSlice";
 import { useDispatch } from "react-redux";
+import { Skeleton } from "../ui/skeleton";
 
 interface Props {
   title: string;
@@ -30,17 +31,21 @@ export default function KanbanColumn({
     >
       <h2 className="font-semibold mb-3">{title}</h2>
 
-      {tasks
-        .filter((task) => task.status === status)
-        .map((task) => (
-          <TaskCard
-            key={task._id}
-            task={task}
-            members={members}
-            onStatusChange={onStatusChange}
-            onAssign={onAssign}
-          />
-        ))}
+      {tasks.length > 0 ? (
+        tasks
+          .filter((task) => task.status === status)
+          .map((task) => (
+            <TaskCard
+              key={task._id}
+              task={task}
+              members={members}
+              onStatusChange={onStatusChange}
+              onAssign={onAssign}
+            />
+          ))
+      ) : (
+        <Skeleton className="h-40 w-64 bg-gray-200" />
+      )}
 
       {title === "Todo" && (
         <Button
