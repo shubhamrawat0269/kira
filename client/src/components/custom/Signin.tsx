@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -20,6 +21,7 @@ const loginSchema = z.object({
 export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -67,7 +69,21 @@ export default function Login() {
 
             <div className="space-y-1">
               <Label>Password</Label>
-              <Input type="password" {...register("password")} />
+              <div className="relative">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  {...register("password")}
+                  className="pr-10"
+                />
+                <Button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute cursor-pointer inset-y-0 right-2 flex items-center bg-transparent text-muted-foreground hover:text-foreground"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </Button>
+              </div>
               <p className="text-red-500 text-sm">{errors.password?.message}</p>
             </div>
 
