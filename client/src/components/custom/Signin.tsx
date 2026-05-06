@@ -87,12 +87,12 @@ export default function Login() {
               <p className="text-red-500 text-sm">{errors.password?.message}</p>
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
               {loading ? "Logging in..." : "Login"}
             </Button>
 
             <div className="text-center">
-              <Link to={`/signup`} className="pr-2 text-sm text-blue-500">
+              <Link to={`/signup`} className="pr-2 text-sm text-blue-500 hover:underline">
                 Create Your Account
               </Link>
             </div>
