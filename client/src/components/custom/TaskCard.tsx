@@ -24,7 +24,11 @@ export default function TaskCard({
       <div className="flex items-center gap-2 h-10">
         <h3 className="font-medium">{task.title}</h3>
 
-        <Button variant="ghost" size="sm" className="ml-auto p-1 cursor-pointer hidden group-hover:flex">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="ml-auto p-1 cursor-pointer hidden group-hover:flex"
+        >
           <EllipsisVertical size={16} />
         </Button>
       </div>
