@@ -2,12 +2,14 @@ import type { Member } from "@/types/project";
 import { assignTask } from "@/services/task";
 
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "../ui/avatar";
+import { User } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
   taskId: string;
@@ -16,35 +18,43 @@ interface Props {
   onAssign: (userId: string) => void;
 }
 
-export default function AssignUserSelect({
-  taskId,
-  members,
-  assignedTo,
-  onAssign,
-}: Props) {
-  const handleAssign = async (userId: string | null) => {
+export default function AssignUserSelect({ taskId, members, onAssign }: Props) {
+  const [selectedName, setSelectedName] = useState<string | null>(null);
+  const handleAssign = async (
+    userId: string | null,
+    userName: string | null,
+  ) => {
     if (!userId) return;
     try {
       await assignTask(taskId, userId);
       onAssign(userId);
+      setSelectedName(userName);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <Select onValueChange={handleAssign} defaultValue={assignedTo}>
-      <SelectTrigger className="w-full mt-2">
-        <SelectValue placeholder="Assign user" />
-      </SelectTrigger>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar className="cursor-pointer">
+          <AvatarFallback>
+            {selectedName ? selectedName.charAt(0) : <User size={14} />}
+          </AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
 
-      <SelectContent>
+      <DropdownMenuContent align="end" className="w-48">
         {members.map((m) => (
-          <SelectItem key={m.user._id} value={m.user._id}>
-            {m.user.name}
-          </SelectItem>
+          <DropdownMenuItem
+            key={m.user._id}
+            className="min-w-0 cursor-pointer"
+            onClick={() => handleAssign(m.user._id, m.user.name)}
+          >
+            <span className="block min-w-0 truncate">{m.user.name}</span>
+          </DropdownMenuItem>
         ))}
-      </SelectContent>
-    </Select>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

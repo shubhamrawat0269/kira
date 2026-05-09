@@ -6,6 +6,7 @@ export interface Task {
   description?: string;
   status: TaskStatus;
   projectId: string;
+  createdAt: string;
   assignedTo?: {
     _id: string;
     name: string;

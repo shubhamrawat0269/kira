@@ -45,7 +45,14 @@ export default function KanbanColumn({
     <div
       className={`bg-gray-100 rounded p-4 w-full ${tasks.length === 0 ? "min-h-30" : ""}`}
     >
-      <h2 className="font-semibold mb-3">{title}</h2>
+      <h2 className="font-semibold mb-3">
+        {title}{" "}
+        {title === "Todo" && (
+          <span className="bg-gray-200 text-gray-600 px-2 py-1 rounded-full text-sm">
+            {tasks.length}
+          </span>
+        )}
+      </h2>
 
       {tasks.length > 0 ? (
         tasks
