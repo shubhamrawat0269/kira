@@ -51,10 +51,12 @@ export default function Navbar({ toggleSidebar }: NavbarProps) {
           <UserDropdown user={user} onLogout={handleLogout} />
         ) : (
           <>
-            <Button variant="outline" onClick={() => navigate("/signin")}>
+            <Button variant="outline" className={'cursor-pointer'} onClick={() => navigate("/signin")}>
               Login
             </Button>
-            <Button onClick={() => navigate("/signup")}>Sign Up</Button>
+            <Button className={'cursor-pointer'} onClick={() => navigate("/signup")}>
+              Sign Up
+            </Button>
           </>
         )}
       </div>

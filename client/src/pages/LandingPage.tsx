@@ -8,15 +8,15 @@ export default function LandingPage() {
     <div className="">
       {/* Hero Section */}
       <div className="text-center mt-20 px-4">
-        <h2 className="text-4xl font-bold mb-4">
+        <h2 className="text-7xl font-bold mb-4">
           Manage Projects Like a Pro
         </h2>
 
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 text-base mb-6">
           Collaborate, assign tasks, and track progress with ease.
         </p>
 
-        <Button size="lg" onClick={() => navigate("/signup")}>
+        <Button size="lg" className={'cursor-pointer'} onClick={() => navigate("/signup")}>
           Get Started
         </Button>
       </div>
